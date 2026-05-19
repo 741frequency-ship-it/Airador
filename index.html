@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AIRadar – En İyi AI Araçları</title>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500;700&family=Space+Grotesk:wght@700;800&display=swap" rel="stylesheet">
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { background: #050810; color: #e8eaf0; font-family: 'DM Sans', sans-serif; min-height: 100vh; }
+  ::-webkit-scrollbar { width: 4px; } ::-webkit-scrollbar-track { background: #050810; } ::-webkit-scrollbar-thumb { background: #2a3a6a; border-radius: 4px; }
+
+  header { border-bottom: 1px solid #1e2a45; padding: 16px 40px; display: flex; align-items: center; justify-content: space-between; position: sticky; top: 0; background: rgba(5,8,16,0.95); backdrop-filter: blur(10px); z-index: 100; flex-wrap: wrap; gap: 12px; }
+  .logo { font-size: 22px; font-weight: 800; font-family: 'Space Grotesk', sans-serif; background: linear-gradient(135deg, #7c9ce8, #3b5bdb); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+  .beta { font-size: 11px; background: #0f1e3d; border: 1px solid #1e3a7a; color: #7c9ce8; padding: 2px 8px; border-radius: 4px; margin-left: 8px; }
+  nav { display: flex; gap: 24px; font-size: 14px; color: #8899bb; }
+  nav span { cursor: pointer; transition: color 0.2s; } nav span:hover { color: #e8eaf0; }
+  .btn { background: linear-gradient(135deg, #3b5bdb, #1971c2); color: white; border: none; padding: 10px 20px; border-radius: 8px; font-size: 13px; font-weight: 600; cursor: pointer; transition: all 0.2s; }
+  .btn:hover { opacity: 0.88; transform: scale(1.03); }
+
+  .hero { text-align: center; padding: 80px 40px 60px; position: relative; overflow: hidden; }
+  .hero-glow { position: absolute; top: -100px; left: 50%; transform: translateX(-50%); width: 600px; height: 400px; background: radial-gradient(ellipse, rgba(59,91,219,0.12) 0%, transparent 70%); pointer-events: none; }
+  .live { display: flex; justify-content: center; align-items: center; gap: 6px; font-size: 13px; color: #8899bb; margin-bottom: 16px; }
+  .dot { width: 8px; height: 8px; background: #22c55e; border-radius: 50%; animation: pulse 2s infinite; }
+  @keyframes pulse { 0%,100%{opacity:0.6} 50%{opacity:1} }
+  h1 { font-size: clamp(32px, 6vw, 58px); font-weight: 800; font-family: 'Space Grotesk', sans-serif; line-height: 1.1; margin-bottom: 20px; }
+  .grad { background: linear-gradient(135deg, #7c9ce8 0%, #3b5bdb 50%, #60c4ff 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+  .sub { font-size: 17px; color: #8899bb; max-width: 480px; margin: 0 auto 36px; line-height: 1.6; }
+  input { background: #0d1326; border: 1px solid #1e2a45; color: #e8eaf0; padding: 12px 20px; border-radius: 12px; font-size: 14px; outline: none; transition: border 0.2s; width: 300px; max-width: 100%; }
+  input:focus { border-color: #3b5bdb; }
+
+  .cats { display: flex; gap: 8px; flex-wrap: wrap; padding: 0 40px 32px; justify-content: center; }
+  .cat { background: transparent; border: 1px solid #1e2a45; color: #8899bb; padding: 7px 16px; border-radius: 20px; font-size: 13px; cursor: pointer; transition: all 0.2s; font-family: 'DM Sans', sans-serif; }
+  .cat.active, .cat:hover { background: #3b5bdb; border-color: #3b5bdb; color: white; }
+
+  .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 20px; padding: 0 40px 80px; max-width: 1100px; margin: 0 auto; }
+  .card { background: linear-gradient(135deg, #0d1326 0%, #111827 100%); border: 1px solid #1e2a45; border-radius: 16px; padding: 24px; transition: all 0.25s; cursor: pointer; }
+  .card:hover { border-color: #3b5bdb; transform: translateY(-4px); box-shadow: 0 12px 40px rgba(59,91,219,0.15); }
+  .card-top { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 12px; }
+  .card h2 { font-size: 18px; font-weight: 700; font-family: 'Space Grotesk', sans-serif; margin-top: 4px; }
+  .badge { font-size: 11px; font-weight: 700; padding: 3px 10px; border-radius: 20px; background: rgba(59,91,219,0.15); color: #7c9ce8; border: 1px solid rgba(59,91,219,0.3); white-space: nowrap; }
+  .desc { font-size: 14px; color: #8899bb; line-height: 1.6; margin-bottom: 16px; }
+  .meta { display: flex; justify-content: space-between; align-items: center; margin-bottom: 16px; }
+  .stars { color: #f59e0b; font-size: 13px; letter-spacing: 1px; }
+  .rating-num { font-size: 12px; color: #6678a0; margin-top: 2px; }
+  .price { font-size: 13px; color: #7c9ce8; font-weight: 600; }
+  .card-btn { width: 100%; background: linear-gradient(135deg, #3b5bdb, #1971c2); color: white; border: none; padding: 10px; border-radius: 8px; font-size: 13px; font-weight: 600; cursor: pointer; transition: all 0.2s; font-family: 'DM Sans', sans-serif; }
+  .card-btn:hover { opacity: 0.88; }
+
+  footer { border-top: 1px solid #1e2a45; padding: 32px 40px; text-align: center; color: #3d4f6e; font-size: 13px; }
+
+  .hidden { display: none; }
+  @media(max-width:600px) { header { padding: 14px 20px; } .grid { padding: 0 16px 60px; } .cats { padding: 0 16px 24px; } .hero { padding: 60px 20px 40px; } }
+</style>
+</head>
+<body>
+
+<header>
+  <div style="display:flex;align-items:center">
+    <span class="logo">⚡ AIRadar</span>
+    <span class="beta">BETA</span>
+  </div>
+  <nav>
+    <span>Araçlar</span>
+    <span>Karşılaştır</span>
+    <span>Blog</span>
+  </nav>
+  <button class="btn">Bülten</button>
+</header>
+
+<section class="hero">
+  <div class="hero-glow"></div>
+  <div class="live"><span class="dot"></span><span id="toolCount">9 araç incelendi · Sürekli güncelleniyor</span></div>
+  <h1>En İyi AI Araçlarını<br><span class="grad">Keşfet & Kazan</span></h1>
+  <p class="sub">Dürüst incelemeler, gerçek puanlar. Her araç için affiliate linkimiz var — sıfır taraflılık.</p>
+  <input type="text" id="search" placeholder="🔍  Araç ara..." oninput="render()">
+</section>
+
+<div class="cats" id="cats"></div>
+<div class="grid" id="grid"></div>
+
+<footer>© 2026 AIRadar — Affiliate linkler içerir. Sitemizi desteklediğiniz için teşekkürler.</footer>
+
+<script>
+const tools = [
+  { name:"ChatGPT", cat:"Yazı", tag:"En Popüler", desc:"Metin yazımı, fikir üretme, kod yardımı için sektör lideri.", rating:4.8, price:"Ücretsiz / $20/ay", link:"https://openai.com", badge:"🔥" },
+  { name:"Midjourney", cat:"Görsel", tag:"Sanat", desc:"Metinden inanılmaz kalitede görseller üretir. Tasarımcıların favorisi.", rating:4.7, price:"$10/ay'dan", link:"https://midjourney.com", badge:"🎨" },
+  { name:"Claude", cat:"Yazı", tag:"Analiz", desc:"Uzun belge analizi ve karmaşık akıl yürütmede en güçlü AI.", rating:4.8, price:"Ücretsiz / $20/ay", link:"https://claude.ai", badge:"🧠" },
+  { name:"ElevenLabs", cat:"Ses", tag:"Ses Klonlama", desc:"Gerçekçi ses klonlama ve metin-konuşmaya dönüştürme.", rating:4.6, price:"$5/ay'dan", link:"https://elevenlabs.io", badge:"🎙️" },
+  { name:"Runway", cat:"Video", tag:"Video AI", desc:"Metinden video üretimi ve video düzenleme için güçlü araç.", rating:4.5, price:"$12/ay'dan", link:"https://runwayml.com", badge:"🎬" },
+  { name:"Cursor", cat:"Kod", tag:"Geliştirici", desc:"AI destekli kod editörü. Programcılığın geleceği şu an burada.", rating:4.9, price:"Ücretsiz / $20/ay", link:"https://cursor.sh", badge:"⚡" },
+  { name:"Perplexity", cat:"Arama", tag:"Araştırma", desc:"AI destekli arama motoru. Kaynak göstererek yanıt verir.", rating:4.6, price:"Ücretsiz / $20/ay", link:"https://perplexity.ai", badge:"🔍" },
+  { name:"Suno", cat:"Müzik", tag:"Müzik AI", desc:"Metinden tam müzik parçası üretir. Yeni nesil müzik prodüksiyonu.", rating:4.4, price:"Ücretsiz / $8/ay", link:"https://suno.ai", badge:"🎵" },
+  { name:"Notion AI", cat:"Verimlilik", tag:"İş Aracı", desc:"Notlarını akıllı hale getirir. Özetler, yazar, organize eder.", rating:4.3, price:"$8/ay'dan", link:"https://notion.so", badge:"📋" },
+];
+
+const cats = ["Tümü","Yazı","Görsel","Ses","Video","Kod","Arama","Müzik","Verimlilik"];
+let activeCat = "Tümü";
+
+function stars(r){ return "★".repeat(Math.round(r)) + "☆".repeat(5-Math.round(r)); }
+
+function render(){
+  const q = document.getElementById("search").value.toLowerCase();
+  const filtered = tools.filter(t =>
+    (activeCat === "Tümü" || t.cat === activeCat) &&
+    (t.name.toLowerCase().includes(q) || t.desc.toLowerCase().includes(q))
+  );
+  const grid = document.getElementById("grid");
+  if(filtered.length === 0){ grid.innerHTML = '<div style="grid-column:1/-1;text-align:center;padding:60px;color:#8899bb">Sonuç bulunamadı.</div>'; return; }
+  grid.innerHTML = filtered.map(t => `
+    <div class="card" onclick="window.open('${t.link}','_blank')">
+      <div class="card-top">
+        <div><div style="font-size:22px">${t.badge}</div><h2>${t.name}</h2></div>
+        <span class="badge">${t.tag}</span>
+      </div>
+      <p class="desc">${t.desc}</p>
+      <div class="meta">
+        <div><div class="stars">${stars(t.rating)}</div><div class="rating-num">${t.rating}/5.0</div></div>
+        <div class="price">${t.price}</div>
+      </div>
+      <button class="card-btn">İncele & Dene →</button>
+    </div>
+  `).join("");
+}
+
+function initCats(){
+  const el = document.getElementById("cats");
+  el.innerHTML = cats.map(c => `<button class="cat ${c===activeCat?'active':''}" onclick="setcat('${c}')">${c}</button>`).join("");
+}
+
+function setcat(c){ activeCat = c; initCats(); render(); }
+
+initCats(); render();
+</script>
+</body>
+</html>
